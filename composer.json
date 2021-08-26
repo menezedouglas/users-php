@@ -1,0 +1,19 @@
+{
+    "name": "menezedouglas/users-php",
+    "description": "A simple API RestFull with only php",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Douglas Menezes",
+            "email": "menezedouglas@outlook.com.br"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
