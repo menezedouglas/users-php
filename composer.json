@@ -8,7 +8,9 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Configs/app.php"
+            "app/Configs/cors.php",
+            "app/Configs/environment.php",
+            "app/Configs/database.php"
         ]
     },
     "authors": [

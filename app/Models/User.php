@@ -33,9 +33,6 @@ class User extends BaseModel
     protected $fillable = [
         'name',
         'email',
-        'age',
-        'created_at',
-        'updated_at',
-        'deleted_at'
+        'age'
     ];
 }

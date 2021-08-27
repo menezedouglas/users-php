@@ -11,7 +11,7 @@ define("DATA_LAYER_CONFIG", [
     "port" => getenv('DB_PORT'),
     "dbname" => getenv('DB_NAME'),
     "username" => getenv('DB_USER'),
-    "passwd" => getenv('DB_PORT'),
+    "passwd" => getenv('DB_PASSWORD'),
     "options" => [
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
