@@ -6,7 +6,7 @@ $router = new Router(getenv('APP_URL'));
 
 $router->namespace('App\Http\Controllers');
 
-$router->get('/', 'UserController:test');
+$router->get('/', 'UserController:index');
 
 /**
  * execute
