@@ -1,28 +1,28 @@
 {
-    "name": "menezedouglas/users-php",
-    "description": "A simple API RestFull with only php",
-    "type": "project",
-    "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "App\\": "app/"
-        },
-        "files": [
-            "app/Configs/cors.php",
-            "app/Configs/environment.php",
-            "app/Configs/database.php"
-        ]
+  "name": "menezedouglas/users-php",
+  "description": "A simple API RestFull with only php",
+  "type": "project",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
     },
-    "authors": [
-        {
-            "name": "Douglas Menezes",
-            "email": "menezedouglas@outlook.com.br"
-        }
-    ],
-    "minimum-stability": "stable",
-    "require": {
-        "coffeecode/datalayer": "^1.1",
-        "coffeecode/router": "^1.0",
-        "ext-pdo": "*"
+    "files": [
+      "app/Configs/cors.php",
+      "app/Configs/environment.php",
+      "app/Configs/database.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Douglas Menezes",
+      "email": "menezedouglas@outlook.com.br"
     }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "coffeecode/datalayer": "^1.1",
+    "ext-pdo": "*",
+    "ext-http": "*"
+  }
 }

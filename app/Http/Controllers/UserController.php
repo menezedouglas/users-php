@@ -6,6 +6,8 @@ use App\Common\Response;
 
 use App\Models\User;
 
+use App\Http\Requests\User\{StoreRequest};
+
 class UserController
 {
 
@@ -54,9 +56,12 @@ class UserController
         }
     }
 
-    public function store()
+    /**
+     * @param StoreRequest $request
+     */
+    public function store(StoreRequest $request)
     {
-
+        print_r($request->all());
     }
 
 }

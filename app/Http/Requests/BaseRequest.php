@@ -2,15 +2,18 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\Validate;
+use Exception;
+
 class BaseRequest
 {
 
     /**
      * Set the method allowed for this request
      *
-     * @var string
+     * @var bool
      */
-    protected string $allowedMethod = '*';
+    protected bool $permitted = false;
 
     /**
      * Valid inputs in request
@@ -62,7 +65,21 @@ class BaseRequest
      */
     public function all(): array
     {
+        $this->validate();
+
         return $this->data;
+    }
+
+    /**
+     * @throws Exception
+     */
+    private function validate(): void
+    {
+        try {
+            print_r(Validate::email('menezedouglas@outlook.com.br'));
+        } catch (Exception $error) {
+            throw new Exception('Unprocessable Entity', 422);
+        }
     }
 
 }

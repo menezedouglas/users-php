@@ -1,11 +1,11 @@
 <?php
-
 use CoffeeCode\Router\Router;
 
 $router = new Router(getenv('APP_URL'));
 
 $router->namespace('App\Http\Controllers');
 
+//$router->group('user');
 $router->get('/', 'UserController:index');
 
 /**
