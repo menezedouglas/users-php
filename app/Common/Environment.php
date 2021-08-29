@@ -20,7 +20,8 @@ class Environment
 
         foreach ($lines as $line)
         {
-            putenv(trim($line));
+            if(!!trim($line))
+                putenv(trim($line));
         }
 
     }

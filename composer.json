@@ -23,6 +23,7 @@
   "require": {
     "coffeecode/datalayer": "^1.1",
     "ext-pdo": "*",
-    "ext-http": "*"
+    "ext-json": "*",
+    "pecee/simple-router": "4.3.7.2"
   }
 }

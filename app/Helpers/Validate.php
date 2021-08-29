@@ -35,7 +35,7 @@ class Validate
      */
     public static function numeric($val): bool
     {
-        return !is_nan($val);
+        return is_numeric($val);
     }
 
     /**
@@ -60,6 +60,30 @@ class Validate
     public static function maxLength(string $val, int $maxLength): bool
     {
         return strlen($val) <= $maxLength;
+    }
+
+    /**
+     * Validate a minimum value
+     *
+     * @param int $val
+     * @param int $min
+     * @return bool
+     */
+    public static function min(int $val, int $min): bool
+    {
+        return $val >= $min;
+    }
+
+    /**
+     * Validate a maximum value
+     *
+     * @param int $val
+     * @param int $max
+     * @return bool
+     */
+    public static function max(int $val, int $max): bool
+    {
+        return $val <= $max;
     }
 
 }

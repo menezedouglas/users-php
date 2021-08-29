@@ -12,28 +12,28 @@ class BaseModel extends DataLayer
      *
      * @var string
      */
-    protected $table = '';
+    protected string $table = '';
 
     /**
      * The primary key of table
      *
      * @var string
      */
-    protected $primaryKey = '';
+    protected string $primaryKey = '';
 
     /**
      * The table required fields
      *
      * @var string[]
      */
-    protected $fillable = [];
+    protected array $fillable = [];
 
     /**
      * Datetime validation
      *
      * @var bool
      */
-    protected $timestamp = true;
+    protected bool $timestamp = true;
 
     public function __construct()
     {

@@ -1,19 +1,16 @@
 <?php
-use CoffeeCode\Router\Router;
 
-$router = new Router(getenv('APP_URL'));
+use Pecee\Http\Request;
+use Pecee\SimpleRouter\SimpleRouter as Router;
 
-$router->namespace('App\Http\Controllers');
+Router::group(['prefix' => 'user'], function() {
+    Router::get(
+        '/',
+        'UserController@index'
+    )->name('api.user');
 
-//$router->group('user');
-$router->get('/', 'UserController:index');
-
-/**
- * execute
- */
-$router->dispatch();
-
-if ($router->error()) {
-    var_dump($router->error());
-    //router->redirect("/error/{$router->error()}");
-}
+    Router::post(
+        '/new',
+        'UserController@store'
+    )->name('api.user');
+});

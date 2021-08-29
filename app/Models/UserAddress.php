@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-class User extends BaseModel
+class UserAddress extends BaseModel
 {
     /**
      * The table name
      *
      * @var string
      */
-    protected string $table = 'users';
+    protected string $table = 'user_addresses';
 
     /**
      * The table primary key
@@ -31,9 +31,10 @@ class User extends BaseModel
      * @var string[]
      */
     protected array $fillable = [
-        'name',
-        'email',
-        'age'
+        'user_id',
+        'address_id',
+        'number',
+        'complement'
     ];
 
 }

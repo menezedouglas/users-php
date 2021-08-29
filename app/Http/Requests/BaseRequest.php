@@ -2,11 +2,27 @@
 
 namespace App\Http\Requests;
 
-use App\Helpers\Validate;
 use Exception;
 
+use Pecee\Http\Input\InputHandler;
+use Pecee\Http\Request;
+
+use App\Common\Response;
+
+use App\Helpers\Validate;
+
+
+/**
+ *
+ */
 class BaseRequest
 {
+    /**
+     * Class to response
+     *
+     * @var Response
+     */
+    protected Response $response;
 
     /**
      * Set the method allowed for this request
@@ -30,11 +46,39 @@ class BaseRequest
     protected array $rules = [];
 
     /**
+     * Errors emitted for validate inputs
+     *
+     * @var string[]
+     */
+    protected array $errors = [];
+
+    /**
      * Messages for inputs with errors
      *
      * @var string[]
      */
     protected array $errorMessages = [];
+
+    /**
+     * Constructor method
+     */
+    public function __construct()
+    {
+        $this->response = new Response();
+        $this->setData((new InputHandler(new Request()))->all());
+    }
+
+    /**
+     * Set multiple inputs into data
+     *
+     * @param array $data
+     */
+    private function setData(array $data)
+    {
+        foreach ($data as $key => $value) {
+            $this->setIntoData($key, $value);
+        }
+    }
 
     /**
      * Add input into valid data
@@ -48,38 +92,172 @@ class BaseRequest
     }
 
     /**
-     * Get a specific valid input
+     * Get a specific input in data
      *
-     * @param $key
+     * @param string $key
      * @return mixed
      */
-    public function input($key): mixed
+    private function getDataByKey(string $key)
     {
         return $this->data[$key];
     }
 
     /**
-     * Get all the valid inputs
+     * Get all inputs in data
      *
      * @return array
      */
-    public function all(): array
+    private function getData()
     {
-        $this->validate();
-
         return $this->data;
     }
 
     /**
+     * Set errors
+     *
+     * @param array $errors
+     */
+    private function setErrors(array $errors)
+    {
+        $this->errors = $errors;
+    }
+
+    /**
+     * Return all emitted errors
+     *
+     * @return string[]
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
+
+    /**
+     * Get a specific valid input
+     *
+     * @param $key
+     * @return mixed
+     */
+    public function input($key)
+    {
+        return $this->data[$key];
+    }
+
+    /**
+     * Get all inputs if are valid
+     *
+     * @return array
      * @throws Exception
      */
-    private function validate(): void
+    public function all(): array
     {
-        try {
-            print_r(Validate::email('menezedouglas@outlook.com.br'));
-        } catch (Exception $error) {
-            throw new Exception('Unprocessable Entity', 422);
+        if($this->validate()) {
+            return ['errors' => $this->errors];
+        } else {
+            return $this->getData();
         }
+    }
+
+    /**
+     * Validate all inputs
+     *
+     * @return bool
+     * @throws Exception
+     */
+    private function validate(): bool
+    {
+        $errors = [];
+        $data = $this->getData();
+
+        $inputRules = $this->extractRules();
+
+        foreach ($inputRules as $key => $rules) {
+            foreach ($rules as $rule) {
+                if(!is_array($rule)) {
+                    switch ($rule) {
+                        case 'required': {
+                            if(!isset($data[$key]))
+                            {
+                                $errors[$key][] = $this->errorMessages[$key.'.'.$rule];
+                            }
+                            break;
+                        }
+                        case 'string': {
+                            if(!Validate::string($data[$key]))
+                            {
+                                $errors[$key][] = $this->errorMessages[$key.'.'.$rule];
+                            }
+                            break;
+                        }
+                        case 'email': {
+                            if(!Validate::email($data[$key]))
+                            {
+                                $errors[$key][] = $this->errorMessages[$key.'.'.$rule];
+                            }
+                            break;
+                        }
+                        case 'numeric': {
+                            if(!Validate::numeric((string) $data[$key]))
+                            {
+                                $errors[$key][] = $this->errorMessages[$key.'.'.$rule];
+                            }
+                            break;
+                        }
+                    }
+                }
+                else {
+                    switch ($rule['rule']) {
+                        case 'min': {
+                            if(!Validate::min($data[$key], (int) $rule['param']))
+                            {
+                                $errors[$key][] = $this->errorMessages[$key.'.'.$rule['rule']];
+                            }
+                            break;
+                        }
+                        case 'max': {
+                            if(!Validate::max($data[$key], (int) $rule['param']))
+                            {
+                                $errors[$key][] = $this->errorMessages[$key.'.'.$rule['rule']];
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        $this->setErrors($errors);
+
+        return count($errors) > 0;
+
+    }
+
+    /**
+     * Extract all rules for execute validation
+     *
+     * @return array
+     */
+    private function extractRules(): array
+    {
+        $rules = [];
+
+        foreach ($this->rules as $input => $inputRules) {
+            $explodedRules = explode('|', $inputRules);
+
+            foreach ($explodedRules as $rule) {
+                if (strpos($rule, ':')) {
+                    $temp = explode(':', $rule);
+                    $rules[$input][] = [
+                        'rule' => $temp[0],
+                        'param' => $temp[1]
+                    ];
+                } else {
+                    $rules[$input][] = $rule;
+                }
+            }
+        }
+
+        return $rules;
     }
 
 }
