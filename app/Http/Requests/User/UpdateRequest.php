@@ -4,7 +4,7 @@ namespace App\Http\Requests\User;
 
 use App\Http\Requests\BaseRequest;
 
-class StoreRequest extends BaseRequest
+class UpdateRequest extends BaseRequest
 {
 
     /**

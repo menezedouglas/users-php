@@ -8,12 +8,12 @@ class Validate
     /**
      * Validate E-mail
      *
-     * @param string $email
+     * @param $email
      * @return bool
      */
-    public static function email(string $email): bool
+    public static function email($email): bool
     {
-        return !!filter_var($email, FILTER_VALIDATE_EMAIL);
+        return $email && !!filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 
     /**
@@ -24,7 +24,7 @@ class Validate
      */
     public static function string($val): bool
     {
-        return is_string($val);
+        return $val && is_string($val);
     }
 
     /**
@@ -35,55 +35,55 @@ class Validate
      */
     public static function numeric($val): bool
     {
-        return is_numeric($val);
+        return $val && is_numeric($val);
     }
 
     /**
      * Validate a minimum length of a value
      *
-     * @param string $val
+     * @param $val
      * @param int $minLength
      * @return bool
      */
-    public static function minLength(string $val, int $minLength): bool
+    public static function minLength($val, int $minLength): bool
     {
-        return strlen($val) >= $minLength;
+        return $val && strlen($val) >= $minLength;
     }
 
     /**
      * Validate a maximum length of a value
      *
-     * @param string $val
+     * @param $val
      * @param int $maxLength
      * @return bool
      */
-    public static function maxLength(string $val, int $maxLength): bool
+    public static function maxLength($val, int $maxLength): bool
     {
-        return strlen($val) <= $maxLength;
+        return $val && strlen($val) <= $maxLength;
     }
 
     /**
      * Validate a minimum value
      *
-     * @param int $val
+     * @param $val
      * @param int $min
      * @return bool
      */
-    public static function min(int $val, int $min): bool
+    public static function min($val, int $min): bool
     {
-        return $val >= $min;
+        return $val && $val >= $min;
     }
 
     /**
      * Validate a maximum value
      *
-     * @param int $val
+     * @param $val
      * @param int $max
      * @return bool
      */
-    public static function max(int $val, int $max): bool
+    public static function max($val, int $max): bool
     {
-        return $val <= $max;
+        return $val && $val <= $max;
     }
 
 }

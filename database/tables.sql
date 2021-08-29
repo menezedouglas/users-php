@@ -67,7 +67,7 @@ create table if not exists user_addresses
     user_id    int       not null,
     address_id int       not null,
     number     bigint    not null,
-    complement varchar(255),
+    complement varchar(255) null,
     created_at timestamp not null default now(),
     updated_at timestamp not null default now(),
     deleted_at timestamp,

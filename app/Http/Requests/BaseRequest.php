@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Common\DB;
 use Exception;
 
 use Pecee\Http\Input\InputHandler;
@@ -23,13 +24,6 @@ class BaseRequest
      * @var Response
      */
     protected Response $response;
-
-    /**
-     * Set the method allowed for this request
-     *
-     * @var bool
-     */
-    protected bool $permitted = false;
 
     /**
      * Valid inputs in request
@@ -60,12 +54,20 @@ class BaseRequest
     protected array $errorMessages = [];
 
     /**
+     * Database connection
+     *
+     * @var DB
+     */
+    private DB $connection;
+
+    /**
      * Constructor method
      */
     public function __construct()
     {
         $this->response = new Response();
         $this->setData((new InputHandler(new Request()))->all());
+        $this->connection = new DB();
     }
 
     /**

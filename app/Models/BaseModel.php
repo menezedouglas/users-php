@@ -4,6 +4,9 @@ namespace App\Models;
 
 use CoffeeCode\DataLayer\DataLayer;
 
+//use App\Common\DB;
+//use PDOStatement;
+
 class BaseModel extends DataLayer
 {
 
@@ -22,6 +25,13 @@ class BaseModel extends DataLayer
     protected string $primaryKey = '';
 
     /**
+     * The fields for selection
+     *
+     * @var string
+     */
+    protected string $select = '*';
+
+    /**
      * The table required fields
      *
      * @var string[]
@@ -35,6 +45,9 @@ class BaseModel extends DataLayer
      */
     protected bool $timestamp = true;
 
+    /**
+     * Constructor Method
+     */
     public function __construct()
     {
         parent::__construct(
@@ -43,6 +56,15 @@ class BaseModel extends DataLayer
             $this->primaryKey,
             $this->timestamp
         );
+    }
+
+    /**
+     * Drop a specific resource
+     */
+    public function drop()
+    {
+        $this->deleted_at = date('Y-m-d H:i:s');
+        $this->save();
     }
 
 }
