@@ -1,37 +1,107 @@
-## Welcome to GitHub Pages
+# Users PHP 😉
 
-You can use the [editor on GitHub](https://github.com/menezedouglas/users-php/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+> This is a simple API Rest Full in PHP
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+## To run this API, you need... 👍
+<table>
+    <tbody>
+        <tr>
+            <td>GIT</td>
+            <td>^2.24.x</td>
+        </tr>
+        <tr>
+            <td>PHP</td>
+            <td>^7.4</td>
+        </tr>
+        <tr>
+            <td>Composer</td>
+            <td>^2.1.x</td>
+        </tr>
+        <tr>
+            <td>MySQL Database</td>
+            <td>^8.0.x</td>
+        </tr>
+    </tbody>
+</table>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## All Right? Now, follow the instructions below... 👌
 
-```markdown
-Syntax highlighted code block
+> Clone this project in your computer... Use the command below to this!
+> 
+> ```
+> git clone https://github.com/menezedouglas/users-php.git
+> ```
 
-# Header 1
-## Header 2
-### Header 3
+> Go to folder the project...
+> 
+> ```
+> cd users-php
+> ```
 
-- Bulleted
-- List
+> With the project cloned in your computer, duplicate and rename the file .env.example
+> 
+> ```
+> cp .env.example .env  
+> ```
 
-1. Numbered
-2. List
+> Configure your database in .env file
+> 
+> ``` 
+> DB_DRIVER=mysql
+> DB_HOST=localhost
+> DB_PORT=3306
+> DB_NAME=users_php
+> DB_USER=root
+> DB_PASSWORD=
+> ```
+> 
+> If you like, adjust the name of API and Base URL 
+> 
+> ```
+> APP_NAME=users_php 
+> APP_URL=http://localhost
+> ```
 
-**Bold** and _Italic_ and `Code` text
+## Good! Now, we are to go create tables and views in your database
 
-[Link](url) and ![Image](src)
-```
+> Open your app for database management (DataGrid, PhpMyAdmin, etc...), and run files in
+> 
+> ```
+> ~/database
+> ```
+> 
+> ### Await and pay attention this!
+> 
+> Run files in this order
+> 
+> First: run the tables.sql
+> 
+> After: run the views.sql
+>
+> #### If you are not unable to create the tables or views, search the internet by "How to run .sql files in < you app to database management >".
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Fine! Now, we are to go install all dependencies of project
+> In the base path of project, run this:
+> 
+> ```
+> composer install
+> ```
 
-### Jekyll Themes
+## Finally! We are go start the API...
+> Go to public folder
+> 
+> ```
+> cd public
+> ```
+> 
+> And start PHP server using this:
+> 
+> ```
+> php -S localhost:80
+> ```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/menezedouglas/users-php/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+## Success!!
+> Now you can follow the API documentation in the [POSTMAN](https://documenter.getpostman.com/view/9336516/U16bvTxC)!
+> 
+> I see you later, Dev!
