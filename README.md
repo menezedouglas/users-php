@@ -1,6 +1,6 @@
 # Users PHP 😉
 
-> This is a simple API RestFull in PHP
+> This is a simple API Rest Full in PHP
 
 
 ## To run this API, you need... 👍
@@ -105,4 +105,3 @@
 > Now you can follow the API documentation in the [POSTMAN](https://documenter.getpostman.com/view/9336516/U16bvTxC)!
 > 
 > I see you later, Dev!
-
